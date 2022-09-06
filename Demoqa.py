@@ -22,7 +22,7 @@ user_data = {'user_name': 'Marazmator',
             'user_email': 'test@mail.ru',
             'current_adress': 'Moscow',
             'permanent_adress': 'Sherbakovskaya street, 32/7, app. 10'}
-
+time.sleep(2)
 # Переходим в раздел Elements
 driver.find_element(By.CSS_SELECTOR, 'div.card.mt-4.top-card').click() # Переходим в раздел Elements
 # Выбираем подраздел Text Box
@@ -31,9 +31,9 @@ driver.find_element(By.XPATH, '//li[@id="item-0"]/span[contains(., "Text Box")]'
 assert driver.current_url == text_box_url, 'Current URL id wrong'
 
 # Обновляем страницу, gеремещение вперед-назад в истории браузера
-driver.refresh()
-driver.back()
-driver.forward()
+#driver.refresh()
+#driver.back()
+#driver.forward()
 
 driver.find_element(By.ID, 'userName').send_keys(user_data['user_name'])
 
