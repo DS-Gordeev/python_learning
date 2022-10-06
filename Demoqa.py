@@ -44,6 +44,7 @@ def text_box():
     assert user_data['user_email'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#email').text, 'Wrong email output'
     assert user_data['current_adress'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#currentAddress').text, 'Wrong currentAddress output'
     assert user_data['permanent_adress'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#permanentAddress').text, 'Wrong permanentAddress output'
+    driver.quit()
 
 # Обновляем страницу, gеремещение вперед-назад в истории браузера
 def refresh_and_back_forward():
@@ -68,13 +69,14 @@ def action_chains():
     action = ActionChains(driver)
     elem = driver.find_element(By.CSS_SELECTOR, 'div.element-group:nth-child(5) span.group-header div.header-wrapper')
     action.scroll_to_element(elem).perform()
+    driver.quit()
 
 # Делаем скриншот экрана
 def do_screenshot():
     date_format = dt.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     driver.save_screenshot(f'./screenshots/text_box_screenshot {date_format}.png')
 
-# Check Box
+# Check Box (проверка, что чекбокс активен)
 def check_box():
     driver.find_element(By.XPATH, '//li[@id="item-1"]/span[contains(., "Check Box")]').click()
     driver.find_element(By.CSS_SELECTOR, 'button[title="Expand all"]').click()
@@ -87,8 +89,9 @@ def check_box():
     driver.find_element(By.CSS_SELECTOR, 'input#tree-node-desktop + span.rct-checkbox').click()
     status_checkbox = driver.find_element(By.CSS_SELECTOR, 'input#tree-node-desktop').is_selected()
     print(status_checkbox) # нажат - True
+    driver.quit()
 
-# Radio Button
+# Radio Button (проверка, что радиобаттон активен)
 def redio_button():
     driver.find_element(By.XPATH, '//li[@id="item-2"]/span[contains(., "Radio Button")]').click()
 
@@ -98,8 +101,9 @@ def redio_button():
     driver.find_element(By.CSS_SELECTOR, 'label[for="yesRadio"]').click()
     status_radio = driver.find_element(By.CSS_SELECTOR, 'input#yesRadio').is_selected()
     print(status_radio) # не нажат - False
+    driver.quit()
 
-# Buttons
+# Buttons (двойной клик, клик правой кнопкой мыши)
 def buttons():
     driver.find_element(By.XPATH, '//li[@id="item-4"]/span[contains(., "Buttons")]').click()
 
@@ -108,8 +112,9 @@ def buttons():
     right_click_button = driver.find_element(By.ID, 'rightClickBtn')
     time.sleep(0.5)
     action.double_click(double_click_button).context_click(right_click_button).perform()
+    driver.quit()
 
-# Slider
+# Slider (перетаскивание бегунка)
 def slider():
     driver.execute_script("window.scrollTo(0, 1000)")
     driver.find_element(By.CSS_SELECTOR, 'div.accordion div.element-group:nth-child(4) span div').click() # Переходим в раздел Widgets
@@ -119,6 +124,7 @@ def slider():
     element = driver.find_element(By.CSS_SELECTOR, 'div#sliderContainer input')
     action = ActionChains(driver)
     action.click_and_hold(element).move_by_offset(500, 0).release().perform()
+    driver.quit()
 
 # Implicit waiting (Неявное ожидание)
 def waiting():
@@ -126,6 +132,27 @@ def waiting():
     driver.get('https://demoqa.com/dynamic-properties')
     driver.find_element(By.ID, 'visibleAfter')
     time.sleep(3)
-    driver.close()
+    driver.quit()
 
-waiting()
+# Сохраняем текст всей страницы
+def current_page_source():
+    page = driver.page_source
+    print(page)
+    driver.quit()
+
+# Работа с вкладками в браузере (открытие новых, переключение между, закрытие, получения списка всех открытых вкладок)
+def work_with_browser_handles():
+    original_window = driver.current_window_handle # сохраняем "id" текущей вкладки браузера (потом можем на нее переключаться)
+    driver.switch_to.new_window('tab') # открываем новую вкладку в браузере и сразу переключаемся на нее
+    driver.get('http://ya.ru')
+    driver.close()
+    driver.switch_to.window(original_window)
+    driver.switch_to.new_window('tab')
+    driver.get('http://rambler.ru')
+    driver.close()
+    driver.switch_to.window(original_window)
+    all_handles = driver.window_handles  # возвращает List всех открытых вкладок, для доступа используем, например, all_handles[0]
+    print(all_handles)
+    driver.quit()
+
+
