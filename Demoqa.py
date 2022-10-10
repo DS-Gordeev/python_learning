@@ -1,11 +1,18 @@
 from selenium import webdriver
-from selenium.webdriver import Keys, ActionChains
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.color import Color
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import datetime as dt
+
 
 options = Options()
 options.add_argument("start-maximized")
@@ -61,11 +68,11 @@ def clear_input():
     driver.find_element(By.ID, 'userName').clear()
 
 # Прокрутка окна браузера вниз на указанное кол-во пикселей
-def scroll_down():
+def scroll_down_javascript():
     driver.execute_script("window.scrollTo(0, 500)")
 
 # Прокрутка окна браузера до определенного элемента ActionChains
-def action_chains():
+def scroll_to_elem():
     action = ActionChains(driver)
     elem = driver.find_element(By.CSS_SELECTOR, 'div.element-group:nth-child(5) span.group-header div.header-wrapper')
     action.scroll_to_element(elem).perform()
@@ -111,7 +118,7 @@ def buttons():
     double_click_button = driver.find_element(By.ID, 'doubleClickBtn')
     right_click_button = driver.find_element(By.ID, 'rightClickBtn')
     time.sleep(0.5)
-    action.double_click(double_click_button).context_click(right_click_button).perform()
+    action.double_click(double_click_button).scroll_from_origin.context_click(right_click_button).perform()
     driver.quit()
 
 # Slider (перетаскивание бегунка)
@@ -127,11 +134,19 @@ def slider():
     driver.quit()
 
 # Implicit waiting (Неявное ожидание)
-def waiting():
-    driver.implicitly_wait()
+def waiting_implicitly_wait():
+    driver.implicitly_wait(20) # Неявное ожидание 20 секунд
     driver.get('https://demoqa.com/dynamic-properties')
     driver.find_element(By.ID, 'visibleAfter')
-    time.sleep(3)
+    driver.quit()
+
+def waiting():
+    driver.implicitly_wait(20) # Явное ожидание до момента когда на элемент можно будет кликнуть
+    driver.get('https://demoqa.com/dynamic-properties')
+    WebDriverWait(driver, timeout=20).until(lambda x: x.find_element(By.ID, "visibleAfter").is_displayed())
+    driver.find_element(By.ID, 'visibleAfter').click()
+    #element = driver.find_element(By.ID, 'visibleAfter')
+
     driver.quit()
 
 # Сохраняем текст всей страницы
@@ -154,5 +169,8 @@ def work_with_browser_handles():
     all_handles = driver.window_handles  # возвращает List всех открытых вкладок, для доступа используем, например, all_handles[0]
     print(all_handles)
     driver.quit()
+
+waiting()
+
 
 
