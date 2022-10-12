@@ -170,7 +170,29 @@ def work_with_browser_handles():
     print(all_handles)
     driver.quit()
 
-waiting()
+# Загрузка файла для формы input с type="file"
+def upload_file():
+    driver.get('https://demoqa.com/upload-download')
+    file_to_upload = 'C:\\AutoTests_home\\autotests_python\\Screenshot_1.jpg'
+    driver.find_element(By.ID, 'uploadFile').send_keys(file_to_upload)
+    success_text = driver.find_element(By.ID, 'uploadedFilePath').text
+    assert success_text == 'C:\\fakepath\\Screenshot_1.jpg', 'Файл не был загружен'
+    driver.quit()
+
+# Проверяем цвет текста кнопки
+def work_with_color():
+    driver.get('https://demoqa.com/dynamic-properties')
+    WebDriverWait(driver, timeout=20).until(EC.visibility_of_element_located((By.ID, 'visibleAfter')))
+    object = driver.find_element(By.ID, 'colorChange')
+    color_button = Color.from_string(object.value_of_css_property('color')).hex # получаем цвет объекта и конвертируем в HEX
+    print(color_button)
+    assert color_button == '#dc3545', 'Неправильный цвет кнопки'
+    driver.quit()
+
+work_with_color()
+
+
+
 
 
 
