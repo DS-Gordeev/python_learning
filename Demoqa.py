@@ -141,12 +141,11 @@ def waiting_implicitly_wait():
     driver.quit()
 
 def waiting():
-    driver.implicitly_wait(20) # Явное ожидание до момента когда на элемент можно будет кликнуть
+    driver.implicitly_wait(20) # Явное ожидание до момента появления элемента в DOM
     driver.get('https://demoqa.com/dynamic-properties')
-    WebDriverWait(driver, timeout=20).until(lambda x: x.find_element(By.ID, "visibleAfter").is_displayed())
+    WebDriverWait(driver, timeout=20).until(lambda x: x.find_element(By.ID, "visibleAfter").is_displayed()) # Явное ожидание с указанием лямбда-функции
+    WebDriverWait(self.browser, 10).until(EC.staleness_of(message))  # Явное ожидание когда объект исчезнет из DOM (c использованием класса expected_conditions)
     driver.find_element(By.ID, 'visibleAfter').click()
-    #element = driver.find_element(By.ID, 'visibleAfter')
-
     driver.quit()
 
 # Сохраняем текст всей страницы
@@ -188,8 +187,8 @@ def work_with_color():
     print(color_button)
     assert color_button == '#dc3545', 'Неправильный цвет кнопки'
     driver.quit()
+    driver.find_elements()
 
-work_with_color()
 
 
 
