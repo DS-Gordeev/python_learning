@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.remote.remote_connection import RemoteConnection
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -13,15 +14,34 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import datetime as dt
 
+# Локальный запуск
+def local_start():
+    options = Options()
+    options.add_argument("start-maximized")
 
-options = Options()
-options.add_argument("start-maximized")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    # Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
+    # driver.maximize_window()
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-# Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
-# driver.maximize_window()
+    driver.get('http://demoqa.com')
 
-driver.get('http://demoqa.com')
+# Удаленный запуск
+#def remote_start():
+#chrome_options = webdriver.ChromeOptions()
+#chrome_options.add_argument('--headless')
+#chrome_options.add_argument('--no-sandbox')
+#chrome_options.add_argument('--remote-debugging-port=9222')
+#chrome_options.add_argument("--disable-dev-shm-usage")
+#chrome_options.add_argument('--user-data-dir=/home/dsgordeev/for_driver')
+
+#chrome_options.set_capability("browserName", "chrome")
+#chrome_options.set_capability("browserVersion", "106")
+#chrome_options.set_capability("platformName", "LINUX")
+#river = webdriver.Remote(command_executor='http://158.160.15.157:4444/wd/hub', options=chrome_options)
+#driver.get('https://ya.ru')
+#print('Тест выполнен!!!')
+#print('Браузер закрыт!!!')
+#quit()
 
 # Text Box
 def text_box():
@@ -99,7 +119,7 @@ def check_box():
     driver.quit()
 
 # Radio Button (проверка, что радиобаттон активен)
-def redio_button():
+def radio_button():
     driver.find_element(By.XPATH, '//li[@id="item-2"]/span[contains(., "Radio Button")]').click()
 
     # Проверка, что radio button нажата или нет (обращение именно к input)
@@ -144,7 +164,7 @@ def waiting():
     driver.implicitly_wait(20) # Явное ожидание до момента появления элемента в DOM
     driver.get('https://demoqa.com/dynamic-properties')
     WebDriverWait(driver, timeout=20).until(lambda x: x.find_element(By.ID, "visibleAfter").is_displayed()) # Явное ожидание с указанием лямбда-функции
-    WebDriverWait(self.browser, 10).until(EC.staleness_of(message))  # Явное ожидание когда объект исчезнет из DOM (c использованием класса expected_conditions)
+    WebDriverWait(driver, 10).until(EC.staleness_of(message))  # Явное ожидание когда объект исчезнет из DOM (c использованием класса expected_conditions)
     driver.find_element(By.ID, 'visibleAfter').click()
     driver.quit()
 
@@ -188,6 +208,10 @@ def work_with_color():
     assert color_button == '#dc3545', 'Неправильный цвет кнопки'
     driver.quit()
     driver.find_elements()
+
+
+
+
 
 
 
