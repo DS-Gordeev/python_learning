@@ -209,6 +209,15 @@ def work_with_color():
     driver.quit()
     driver.find_elements()
 
+# Изменяем значение атрибута у элемента в DOM
+def change_attribute():
+    # Устанавливаем новое значение
+    object = driver.find_elenent(By.ID, 'ID')
+    borwser.execute_script("arguments[0].setAttribute('attribute_name','new_attribute_value');", object)
+    # Проверяем, что значение изменилось
+    object_attribute = object.get_attribute("attribute_name")
+    print(object_attribute)
+
 
 
 
