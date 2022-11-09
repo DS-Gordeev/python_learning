@@ -1,3 +1,5 @@
 *.log
 tmp.py
 screenshots/*
+.idea
+__pycache__
