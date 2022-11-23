@@ -12,7 +12,7 @@ pytest -s -v test_main.py # Запуск всех тестов модуля
 pytest -s -v test_one.py test_two.py # Запуск двух файлов
 pytest -s -v store/ # Запуск тестов из папки
 pytest -s -v test_main.py::test_scenario_1_ff # Запуск конкретного теста
-pytest -s -v -k "test_scenario_8_oib" test_main.py # Запуск конкретного теста
+pytest -s -v -k test_scenario_8_oib # Запуск тестов содержащих подстроку указанную после -k
 pytest -s -v test_classes.py::TestEquality # Запуск тестового класса
 pytest -s -v test_classes.py::TestEquality::test_1 # Запуск конкретного метода из тестового класса
 pytest -m slow # Запуск тестов только с декоратором @pytest.mark.slow
