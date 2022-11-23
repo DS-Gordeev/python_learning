@@ -1,0 +1,42 @@
+XPath функции contains(), starts-with() и text() -  https://habr.com/ru/company/otus/blog/533354/
+XPath общие конструкции - https://soltau.ru/index.php/themes/dev/item/413
+XPath тренажер онлайн - http://xpather.com
+xPath ОСИ - https://www.scientecheasy.com/2019/08/xpath-axes.html/
+
+Проверка регулярных выражений - https://regex101.com/
+
+JSON проверка экстрактора - https://jsonpath.com
+JSON описание того как вытаскивать нужные значения - https://octoperf.com/blog/2017/03/09/how-to-extract-data-from-json-response-using-jmeter/#json-format
+
+Большя статья про различие типов веб-вервисов (RPC, SOAP, REST, graphQL) - https://medium.com/nuances-of-programming/сравнение-архитектурных-стилей-api-soap-vs-rest-vs-graphql-vs-rpc-68855deb3f4
+Краткая статья по SOAP и REST на основе предыдущей статьи - https://www.intervolga.ru/blog/projects/relsy-veb-integratsii-rest-i-soap/
+Руководство по SOAP UI - https://coderlessons.com/tutorials/kachestvo-programmnogo-obespecheniia/uznaite-soapui/soapui-kratkoe-rukovodstvo
+Ассерты в SOAP UI - https://telegra.ph/SOAP-UI-05-09
+Хорошая статья про протокол SOAP - https://systems.education/soap-integration
+
+Официальная документация по Selenium WebDriver - https://www.selenium.dev/documentation/webdriver/
+Список кодов клавишь Selenium WebDriver - https://www.w3.org/TR/webdriver/#keyboard-actions
+Примеры официального кода на git Hub Selemium на Python - https://github.com/SeleniumHQ/seleniumhq.github.io/tree/trunk/examples/python/tests
+Очень много всего (настройка Selenium) - https://www.andreyolegovich.ru
+
+Про файл requirements txt - https://semakin.dev/2020/04/requirements_txt/
+Про виртуальное окружение в Python - https://semakin.dev/2020/04/python_virtualenv/
+
+Исчерпывающий чек-лист по тестированию поиска - https://habr.com/ru/post/577448/
+Чек-лист по безопасности - https://kubig.blogspot.com/2019/04/Chek-listy-dlya-proverki-XSS-SQL-HTML-inyektsiy.html
+
+Большая статья по JSR223 JMeter - https://jmetervn.com/2016/12/05/jsr223-with-groovy-variables-part-1/
+Очень полезный сайт по Jmeter - https://jmetervn.com
+
+Полезный сайт по всем инстркментам QA - https://devqa.io
+
+Дрокументация по Scala / Gatling - https://gatling.io/docs/gatling/reference/current/http/check/
+Gatling Академия - https://academy.gatling.io/courses/take/Run-your-first-tests-with-Gatling/lessons/16252154-gatling-introduction-course-overview
+Нагрузочное тестирование на Gatling — Полное руководство (ХАБР) - https://habr.com/ru/company/otus/blog/552846/
+Хорошее руководствро по Gatling - https://www.james-willett.com/gatling-load-testing-complete-guide/
+Шпаргалка по Gatling - https://worldline.github.io/gatling-cheatsheet/
+Хорошая статья Тинькофф по нагрузочному тестированию - https://www.software-testing.ru/library/testing/performance-testing/3421-performance-testing#:~:text=Закрытая%20модель%20—%20пользователи%20должны,сценарию%2C%20и%20требует%20дальнейшего%20изучения
+Пояснения про открытую и закрытую модель тестирования - https://translated.turbopages.org/proxy_u/en-ru.ru.276c5850-6283c24e-c552cfb2-74722d776562/https/stackoverflow.com/questions/37146261/difference-between-open-ended-and-close-ended-load-testing-tools
+
+POSTMAN - https://community.postman.com/t/how-to-save-a-value-from-response-as-a-environment-variable/11000/5
+Видео с Heisenbug https://www.youtube.com/playlist?list=PLsVTVVvrKX9vNh2Yu0k6W1yoLWXpJdIbI

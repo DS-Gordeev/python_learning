@@ -1,0 +1,47 @@
+ЗАПУСК ТЕСТОВ:
+
+ключи:
+-v или --verbose # Добавляет наименование пройденного теста (вместо символа точки .) и текст PASSED. Использовать всегда
+--count 20 # запуск теста 20 раз подряд. Нужно установить pip install pytest-repeat
+--reruns=2  # Делает максимум 2 рерана теста в случае его падения.
+--last-failed # Запускает только провалившиеся тесты (относительно последнего прогона) еще раз
+--capture=no # Чтобы увидеть вывод print() нужно использовать эту опцию, при обычном запуске pytest их не будет видно
+--maxfail=2  # Остановка после первых двух упавших тестов
+
+pytest -s -v test_main.py # Запуск всех тестов модуля
+pytest -s -v test_one.py test_two.py # Запуск двух файлов
+pytest -s -v store/ # Запуск тестов из папки
+pytest -s -v test_main.py::test_scenario_1_ff # Запуск конкретного теста
+pytest -s -v -k "test_scenario_8_oib" test_main.py # Запуск конкретного теста
+pytest -s -v test_classes.py::TestEquality # Запуск тестового класса
+pytest -s -v test_classes.py::TestEquality::test_1 # Запуск конкретного метода из тестового класса
+pytest -m slow # Запуск тестов только с декоратором @pytest.mark.slow
+
+ДЕКОРАТОРЫ:
+
+@pytest.mark.run(order=1) # Для указания очередгности запуска тестов. Нужно установить pip install pytest-ordering
+@pytest.mark.dependency() # Помечаем первый тест. Второй тест помечает @pytest.mark.dependency(depends=["test_1"]), т.е. второй зависит от первого и т.д. Указывает зависимость между тестами. Если test_1 упадет, то test_2 не запустится. Нужно установить pip install pytest-dependency 
+@pytest.mark.skip(reason="В разработке") # Тест будет пропущен по указанной причине
+@pytest.mark.xfail # Тест не пойдет в статистику проваленных если завершится со статусом FAILED. Не ожидается что данный тест
+завершится успешно. Если этот тест провалится, то у него будет статус XFAIL, но если он все же пройдет, то статус будет XPASS
+
+
+Передача параметров между тестами с сипользованием фикстуры:
+
+_____
+conftest.py
+# Фикстура для передачи данных из теста в тест. В качестве контейнера используется словарь
+@pytest.fixture(scope="module")
+def context():
+    return {}
+
+test_main.py
+def test_1(context):
+    def get_dkp_number(context):
+        dkp_number = driver.find_to_be_clickable(*CosPageLocators.NUMBER_OF_DKP).text
+    	context['dkp_number'] = dkp_number
+
+def test_2(context):
+    dkp_number = context.get('dkp_number')
+    driver.find_to_be_clickable(By.XPATH, f'//a[text()="{dkp_number}"]').click()
+_____

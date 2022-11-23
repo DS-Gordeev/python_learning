@@ -1,0 +1,31 @@
+Capabilities:
+
+{
+  "acceptInsecureCerts": false,
+  "browserName": "chrome",
+  "browserVersion": "106.0.5249.119",
+  "chrome": {
+    "chromedriverVersion": "106.0.5249.61 (511755355844955cd3e264779baf0dd38212a4d0-refs/branch-heads/5249@{#569})",
+    "userDataDir": "/tmp/.com.google.Chrome.TAfA1L"
+  },
+  "goog:chromeOptions": {
+    "debuggerAddress": "localhost:9222"
+  },
+  "networkConnectionEnabled": false,
+  "pageLoadStrategy": "normal",
+  "platformName": "LINUX",
+  "proxy": {},
+  "se:cdp": "ws://10.129.0.18:4444/session/4aa3e42eed699fbe0379864c2be9ba5d/se/cdp",
+  "se:cdpVersion": "106.0.5249.119",
+  "setWindowRect": true,
+  "strictFileInteractability": false,
+  "timeouts": {
+    "implicit": 0,
+    "pageLoad": 300000,
+    "script": 30000
+  },
+  "unhandledPromptBehavior": "dismiss and notify",
+  "webauthn:extension:credBlob": true,
+  "webauthn:extension:largeBlob": true,
+  "webauthn:virtualAuthenticators": true
+}

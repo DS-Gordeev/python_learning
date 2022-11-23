@@ -1,0 +1,46 @@
+git bash here
+
+git config --global user.name "Dmitriy Gordeev"
+git config --global user.email "gordeev@ppdp.ru"
+
+git init
+
+git status # для проверки на какой ветке мы находимся
+
+git mv index.html index.js #переименовали файл index.html в index.js 
+
+git rm -r --cached path_to_your_folder/ # удалить папку из отслеживаемых git
+git rm main.html # Git удалит файл main.html и перестанет его отслеживать 
+
+touch .gitignore # создание файл gitignore
+
+git add .
+git commit -m "Initial commit"
+git push -u origin master
+
+git commit --amend -m "First commit: new files added"
+# добавили эти файлы к предыдущему коммиту (параметр --amend), изменяет предыдущий commit, а не добавляет новый
+
+git restore . - Отменить все локальные изменения в рабочей копии
+
+git log # просмотр истории всех коммитов. Для выхода из просмотра нужно нажать "q"
+git show HEAD # показывает изменения произведенные в последним коммите. Для выхода из просмотра нужно нажать "q". Указав вместо HEAD первые
+пять символов хэша можно просмотреть нужный коммит 
+git diff
+
+git remote add origin https://gitlab.com/ppdp/test/load-tests.git # подключение репозитория
+
+git branch # показывает в какой ветке мы находимся
+git branch dev # создание новой ветки
+git checkout dev # переключение на верку dev
+git checkout -b develop # создать новую ветку develop и СРАЗУ переключиться на неё
+
+git merge [название той ветки, которую присоединяют] #Коммиты переходят в ту ветку, на которой ты находишься, когда «мёрджишь»
+git branch -d develop # удалили ветку develop
+git push origin --delete branch_name # удалить удаленную ветку
+
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet # документация по разметке Markdown Cheatsheet файла README.md 
+
+
+
+

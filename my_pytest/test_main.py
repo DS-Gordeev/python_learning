@@ -25,5 +25,19 @@ def setup():
 def test_1(setup):
     setup.get('http://ya.ru')
 
+# Обработка ошибки через assert
+def test_2():
+    a = 1
+    b = 2
+    assert a == b, 'Значение a и b не совпадают!'
+
+# Обработка ошибки через pytest.fail()
+def test_3():
+    a = 1
+    b = 2
+    if a != b:
+        pytest.fail('Значение a и b не совпадают!')
+
+
 
 

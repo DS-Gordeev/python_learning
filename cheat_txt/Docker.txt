@@ -1,0 +1,37 @@
+Настройка файла с конфигурацией - https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig
+wsl --shutdown
+
+docker -v #Версия докера.
+
+docker run hello-world #Запуск контейнера (он скачивается).
+
+docker pull ubuntu #Скачиваем контейнер.
+docker run -i -t ubuntu bash #Запускаем контейнер ubuntu и в нем запускаем bash. Ключ -i позволяет увидеть терминал. Ключ -t позволит взаимодействовать с терминалом.
+Ключ -d позволяет запустить контейнер не переходя в него.   
+docker container stop <id или имя контейнера> #Останавливает указанный контейнер.
+exti #Выход из контейнера. После выхода контейнер автоматически останавливается.
+
+docker contaier prune #УДАЛЯЕТ все остановленные контейнеры.
+
+Ctrl + P, Ctrl + Q #Выход из контейнера, контейнер НЕ останавливается.  
+
+docker container ls #Показывает список ЗАПУЩЕННЫХ контейнеров с их параметрами.
+docker container ls -a #Показывает полный список контейнеров вместе с ВЫКЛЮЧЕННЫМИ с их параметрами.
+docker ps -a # Такая же конанда, но сокращенная в написании
+
+docker container rm <id или имя контейнера> #Удаляет указанный контейнер. После удаления контейнер его НЕЛЬЗЯ восстановить, все информация теряется
+
+docker container attach <id или имя контейнера> #Подключение к запущеному контейнеру.
+docker container start <id или имя контейнера> #Запускает указанный контейнер.  
+
+docker run -i -t --name ubuntu_1 --rm ubuntu bash #Создание контейнера с указанным именем "ubuntu_1". Ключ --rm означает что контейнер будет 
+автоматически удален после его остановки
+
+docker run -it --mount type=bind,src=C:\Docker\dir_for_bind,target=/bind/ ubuntu bash #Запускаем контейнер с подключенной папкой dir_for_bind на хост-машине. В контейнере подключенная папка будет находиться в папке bind.
+
+docker volume create <my_volume> #Создает том с именем my_volume  
+docker volume ls #Показывает список всех созданных томов
+
+docker run -it --rm -v my_volume:/connected_volume ubuntu bash #Запускаем контейнер с подключенным томом my_volume. В контейнере подключеннэй том будет находиться в папке connected_volume.
+
+docker run -it --mount type=volume,src=my_volume,target=/src/,readonly python python /src/counter.py

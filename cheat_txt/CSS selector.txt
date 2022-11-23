@@ -1,0 +1,48 @@
+$$("input#surname")
+
+ПОИСК ПО ТЭГУ
+
+div#root = <div id="root"> # Поиск по ID
+div.main-menu = <div class="main-menu"> # Поиск по классу
+div.grid.flex-grow-1 = <div class="grid flex-grow-1"> # Поиск по двум классам
+button.p-button[type=button] = <button class="p-button" type="button"> # Поиск тэгу, и атрибуту
+
+
+ПОИСК ПО АТРИБУТУ
+
+В [] указывается значение атрибута
+
+[name=username] = <input name="username">
+
+[title='добавить нового пользователя'] = <button type="button" title="добавить нового пользователя"> # Полное соответствие текста
+[title*='нового'] = <button type="button" title="добавить нового пользователя"> # Вхождение слова в любом месте *
+[title^='пользователя'] = <button type="button" title="пользователя нового добавить"> # Начинается со слова ^
+[title$='добавить'] = <button type="button" title="нового пользователя добавить"> # Заканчивается на слово $
+
+
+ОТРИЦАНИЕ УСЛОВИЙ
+
+input:not([type=text]) = <input class="w-full" name="searchContext" id="searchContext"> # Ищит все input без типа text
+
+
+"ПРЫЖКИ" ПО DOM
+
+div.col-4 h1 = <div class="col-4">
+                    <h1>Заголовок</h1>
+               </div>
+
+div.col-4+h1 = <div class="col-4"> # Через "+" можно найти элемент на одном уровне от искомого, но ниже на один шаг вниз
+               <h1>Заголовок</h1>
+               </div>
+
+div#main li:first-child = Первый элемент списка li в тэге div с id main
+div#main li:last-child = Последний элемент списка li в тэге div с id main
+div#main li:nth-child(3) = Третий элемент списка li в тэге div с id main
+
+ul.menu ul[role=group] li:nth-child(3)
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+$x(" ") - для поиска в консоли по xPath локаторам
+$x("//*[@id='AvailiableRules']/div/div/table/tbody/tr/td[2]") - реальный пример
+
+ПОИСК ПО ТЭГАМ И ЗНАЧЕНИЮ АТРИБУТА
+
+//div[@id='root'] = <div id="root"> # Поиск по атрибуту и его значению
+//div[@class='main-menu'] = <div class="main-menu"> # Поиск по атрибуту и его значению
+//div[@class='grid flex-grow-1'] = <div class="grid flex-grow-1"> # Поиск по двум классам
+//button[@class='p-button'][@type='button'] = <button class="p-button" type="button"> # Поиск по тэгу, и атрибуту
+
+
+ПОИСК ПО ТЕКСТУ В ТЭГЕ И 
+
+//title['Личный кабинет'] = <title>Личный кабинет</title> # содержит текст в тэге
+//span[contains(., 'Главное')] = <span class="news-navigation-menu__title">Главное</span> 
+//div[contains(@id, 'nameInput')] = <div id="usernameInput" class="pdp-input-field w-full"> # содержит текст
+//div[starts-with(@id, 'user')] = <div id="usernameInput" class="pdp-input-field w-full"> # начинается с текста 'user'
+
+Syntax:
+XPath: //tagname[text() = 'text_value']
+
+
+"ПРЫЖКИ" ПО DOM
+
+//div[@id='usernameInput']//input[@id='username'] = <div id="usernameInput">
+                                                         <input id="username" value="">
+                                                    </div>
+
+//ul[contains(@class, 'menu')]/ul[1]/li[3]
+
+Переход на один шаг вверх к родительскому элементу:
+
+//label[@for='radio-undefined-2']/.. = <div class="flex align-items-center">
+                                          <label for="radio-undefined-2">
+                                       </div>
+
+ОСИ XPath
+following-sibling - Выбирает элемент одного уровня после текущего
+//label[text()="ОСМОТР №"]/following-sibling::span/div - <lable>ОСМОТР №</lable>
+                                                         <span></span>
+                                                            <div></div>
+
+
+  
+
+
