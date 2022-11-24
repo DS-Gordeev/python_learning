@@ -4,39 +4,24 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
-
-chrome_options = Options()
-chrome_options.add_argument('start-maximized')
-chrome_service = Service(ChromeDriverManager().install())
-
-# Для FireFox
-#firefox_service = FirefoxService(GeckoDriverManager().install())
-#driver_firefox = webdriver.Firefox(service=firefox_service)
-
-# Фикстура для передачи и закрытия драйвера
-@pytest.fixture()
-def setup():
-    driver = webdriver.Chrome(options=chrome_options, service=chrome_service)
-    yield driver
-    driver.close()
-
-def test_1(setup):
+# Из фикстуры приходит драйвер, а в конце закрывает браузер
+def test_start(setup):
     setup.get('http://ya.ru')
 
 # Обработка ошибки через assert
-def test_2():
-    a = 1
+def test_scope_1(login_and_logout):
+    a = 2
     b = 2
-    assert a == b, 'Значение a и b не совпадают!'
+    print('Значения a и b должны совпадать')
+    assert a == b, 'Значение a и b НЕ совпадают!'
 
 # Обработка ошибки через pytest.fail()
-def test_3():
+def test_scope_2(login_and_logout):
     a = 1
     b = 2
-    if a != b:
-        pytest.fail('Значение a и b не совпадают!')
+    print('Значения a и b должны быть разные')
+    if a == b:
+        pytest.fail('Значение a и b совпадают!')
 
 
 
