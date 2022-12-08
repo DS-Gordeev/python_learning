@@ -14,16 +14,15 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import datetime as dt
 
-# Локальный запуск
-def local_start():
-    options = Options()
-    options.add_argument("start-maximized")
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    # Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
-    # driver.maximize_window()
+options = Options()
+options.add_argument("start-maximized")
 
-    driver.get('http://demoqa.com')
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+# Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
+# driver.maximize_window()
+
+driver.get('http://demoqa.com')
 
 # Удаленный запуск
 #def remote_start():
@@ -207,16 +206,18 @@ def work_with_color():
     print(color_button)
     assert color_button == '#dc3545', 'Неправильный цвет кнопки'
     driver.quit()
-    driver.find_elements()
 
 # Изменяем значение атрибута у элемента в DOM
 def change_attribute():
     # Устанавливаем новое значение
-    object = driver.find_elenent(By.ID, 'ID')
-    borwser.execute_script("arguments[0].setAttribute('attribute_name','new_attribute_value');", object)
+    object = driver.find_element(By.ID, 'ID')
+    driver.execute_script("arguments[0].setAttribute('attribute_name','new_attribute_value');", object)
     # Проверяем, что значение изменилось
     object_attribute = object.get_attribute("attribute_name")
     print(object_attribute)
+
+work_with_color()
+
 
 
 
