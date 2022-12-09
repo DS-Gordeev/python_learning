@@ -1,39 +1,62 @@
+Для выхода из просмотра нужно нажать "q"!!!
+
 git bash here
 
+git remote add origin https://gitlab.com/ppdp/test/load-tests.git # подключение репозитория
 git config --global user.name "Dmitriy Gordeev"
 git config --global user.email "gordeev@ppdp.ru"
 
-git init
 
-git status # для проверки на какой ветке мы находимся
+git init - создает локальный репозиторий
+touch .gitignore # создание файл gitignore
+
+
+git status    # Для проверки на какой ветке мы находимся и статуса файлов этой ветки
+git stash     # Прячет все текущие изменения в stash
+git stash list    # Посмотркть список всех отложенных изменений
+git stash pop    # Достать изменения из стека и вернуть их в рабочую копию
 
 git mv index.html index.js #переименовали файл index.html в index.js 
-
 git rm -r --cached path_to_your_folder/ # удалить папку из отслеживаемых git
-git rm main.html # Git удалит файл main.html и перестанет его отслеживать 
+git rm main.html # Git удалит файл main.html и перестанет его отслеживать
+git rm -f <имя файла> # Файл будет удален, несмотря на все предупреждения, использовать этот ключ осторожно!
+git rm sample.txt # Удалим файл sample.txt из рабочей копии и индекса
+git rm --cached sample.txt # Удалим файл sample.txt из индекса и перемеcтим его в категорию Untracked
 
-touch .gitignore # создание файл gitignore
 
 git add .
 git commit -m "Initial commit"
 git push -u origin master
 
+
 git commit --amend -m "First commit: new files added"
 # добавили эти файлы к предыдущему коммиту (параметр --amend), изменяет предыдущий commit, а не добавляет новый
 
-git restore . - Отменить все локальные изменения в рабочей копии
+
+git restore . - Отменить ВСЕ локальные изменения в текущей ветке
+
 
 git log # просмотр истории всех коммитов. Для выхода из просмотра нужно нажать "q"
-git show HEAD # показывает изменения произведенные в последним коммите. Для выхода из просмотра нужно нажать "q". Указав вместо HEAD первые
-пять символов хэша можно просмотреть нужный коммит 
-git diff
+git log -4  # Показывает 4 (четыре) последних коммита
+git log -p  # Показывает коммиты и изменения в них
+git log --pretty=oneline  # Выводио коммиты в хронологическом порядке одной строкой (удобный просмотр)
 
-git remote add origin https://gitlab.com/ppdp/test/load-tests.git # подключение репозитория
+
+git show HEAD # показывает изменения произведенные в последним коммите. Указав вместо HEAD первые
+пять символов хэша можно просмотреть нужный коммит 
+git diff <хэш_1> <хэш_2>    # Показывает разницу между двумя коммитами 
+
 
 git branch # показывает в какой ветке мы находимся
 git branch dev # создание новой ветки
+git branch -a # показывает список всех веток (локальные и удаленные)
+git branch -d dev # удаляет ветку dev если она слита с какой-либо другой веткой
+git branch -D dev # удаляет ветку dev в любом случае
+
+
 git checkout dev # переключение на верку dev
 git checkout -b develop # создать новую ветку develop и СРАЗУ переключиться на неё
+
 
 git merge [название той ветки, которую присоединяют] #Коммиты переходят в ту ветку, на которой ты находишься, когда «мёрджишь»
 git branch -d develop # удалили ветку develop
