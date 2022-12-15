@@ -1,16 +1,18 @@
 import pytest
+import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Для FireFox
-#firefox_service = FirefoxService(GeckoDriverManager().install())
-#driver_firefox = webdriver.Firefox(service=firefox_service)
+# firefox_service = FirefoxService(GeckoDriverManager().install())
+# driver_firefox = webdriver.Firefox(service=firefox_service)
 
 my_options = Options()
 my_options.add_argument('start-maximized')
 my_service = Service(ChromeDriverManager().install())
+
 
 # Фикстура для запуска и закрытия драйвера
 @pytest.fixture()
@@ -19,6 +21,7 @@ def setup():
     driver = webdriver.Chrome(options=my_options, service=my_service)
     yield driver
     driver.close()
+
 
 # Фикстура для тестирования scope
 # scope='function' - by default
@@ -32,3 +35,13 @@ def login_and_logout():
     print('Вход в систему выполнен')
     yield
     print('Выход из системы выполнен')
+
+
+@pytest.fixture(autouse=True, scope='function')
+def test_duration():
+    """Фикстура для указания времени выполнения теста. Применяется автоматически"""
+    start = time.time()
+    yield
+    stop = time.time()
+    delta = str(stop - start)
+    print(f'Время выполнения теста: {delta[0:4]} секунд')

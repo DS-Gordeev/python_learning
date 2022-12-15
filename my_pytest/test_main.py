@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -19,6 +21,7 @@ def test_scope_1(login_and_logout):
 def test_scope_2(login_and_logout):
     a = 1
     b = 2
+    time.sleep(2.58)
     print('Значения a и b должны быть разные')
     if a == b:
         pytest.fail('Значение a и b совпадают!')
