@@ -30,4 +30,9 @@ def test_scope_2(login_and_logout):
 def test_number(ultimate_answer):
     assert ultimate_answer == 42
 
+@pytest.mark.parametrize("number, data", [(1, 'первое значение'), (2, 'второе значение')])
+def test_with_parametr(number, data):
+    print(f'\nВывод на печать: {number}, {data}')
+
+
 

@@ -32,9 +32,9 @@ def setup():
 @pytest.fixture(scope='function')
 def login_and_logout():
     """Тестовая фикстура для проверки параметра scope фикстуры"""
-    print('Вход в систему выполнен')
+    print('\nВход в систему выполнен')
     yield
-    print('Выход из системы выполнен')
+    print('\nВыход из системы выполнен')
 
 
 @pytest.fixture(autouse=True, scope='function')
@@ -44,7 +44,7 @@ def test_duration():
     yield
     stop = time.time()
     delta = str(stop - start)
-    print(f'Время выполнения теста: {delta[0:4]} секунд')
+    print(f'\nВремя выполнения теста: {delta[0:4]} секунд')
 
 @pytest.fixture(name="ultimate_answer")
 def other_fixture_name():
