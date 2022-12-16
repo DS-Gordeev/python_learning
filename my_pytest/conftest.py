@@ -45,3 +45,8 @@ def test_duration():
     stop = time.time()
     delta = str(stop - start)
     print(f'Время выполнения теста: {delta[0:4]} секунд')
+
+@pytest.fixture(name="ultimate_answer")
+def other_fixture_name():
+    """Фикстура с указанием имени для теста test_number"""
+    return 42

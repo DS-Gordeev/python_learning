@@ -1,7 +1,8 @@
-ЗАПУСК ТЕСТОВ:
+TODO ЗАПУСК ТЕСТОВ:
 
 ключи:
 -v или --verbose # Добавляет наименование пройденного теста (вместо символа точки .) и текст PASSED. Использовать всегда
+-s или --capture=no # Показывает в консоли вывод print`ов
 --count 20 # запуск теста 20 раз подряд. Нужно установить pip install pytest-repeat
 --reruns=2  # Делает максимум 2 рерана теста в случае его падения.
 --last-failed # Запускает только провалившиеся тесты (относительно последнего прогона) еще раз
@@ -19,11 +20,11 @@ pytest --setup-show # Запуск в режиме просмотра SETUP и T
 pytest -m slow # Запуск тестов только с декоратором @pytest.mark.slow
 
 
-ФИКСТУРЫ:
+TODO ПРОСМОТР ВСЕХ СУЩЕСТВУЮЩИХ ФИКСТУР:
 pytest --fixtures-per-test # Показывает где и какая фикстура используется в тестах
 pytest --fixtures # Показывает список всех фикстур и выводит первую документ-строку по ним (можно использовать с ключем -v, тогда выведет все строки)
 
-ОБЛАСТИ ДЕЙСТВИЯ ФИКСТУР (SCOOPES):
+TODO ОБЛАСТИ ДЕЙСТВИЯ ФИКСТУР (SCOOPES):
 @pytest.fixture(scope="module") # Если не указать значение scope=" ", то по умолчанию принимается значение function
 
 scope='function' # Выполняет setup перед началом каждого теста, а teardown по окончанию каждого теста
@@ -32,8 +33,23 @@ scope='module' # Выполняет setup перед началом выполн
 scope='package' # Выполняет setup перед началом выполнения ВСЕХ тестов в конкретной директории (папки), а teardown по окончанию ПОСЛЕДНЕГО теста в этой директории
 scope='session' # Выполняет setup и teardown ОДИН раз, в начале и конце сессии
 
-ДЕКОРАТОРЫ:
+TODO АВТОИСПОЛЬЗОВАНИЕ ФИКСТУРЫ (AUTOUSE):
+@pytest.fixture(autouse=True) # Фикстура будет использоваться автоматически перед каждым тестом
 
+TODO НАИМЕНОВАНИЕ ДЛЯ ФИКСТУР (NAME):
+@pytest.fixture(name="best_fixture_ever") # Можно задавать наименование для удобства использования
+def some_name():
+    return 'Bill'
+def print_some_name(best_fixture_ever):
+    assert best_fixture_ever == 'Bill'
+
+TODO ВСТРОЕННЫЙ ФИКСТУРЫ (BUILTIN FIXTURES):
+tmp_path и tmp_path_factory # Для создания временных папок.
+У tmp_path - function-scope
+У tmp_path_factory - session-scope
+
+
+TODO ДЕКОРАТОРЫ:
 @pytest.mark.run(order=1) # Для указания очередгности запуска тестов. Нужно установить pip install pytest-ordering
 @pytest.mark.dependency() # Помечаем первый тест. Второй тест помечает @pytest.mark.dependency(depends=["test_1"]), т.е. второй зависит от первого и т.д. Указывает зависимость между тестами. Если test_1 упадет, то test_2 не запустится. Нужно установить pip install pytest-dependency 
 @pytest.mark.skip(reason="В разработке") # Тест будет пропущен по указанной причине

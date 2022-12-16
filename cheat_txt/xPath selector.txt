@@ -1,7 +1,7 @@
 $x(" ") - для поиска в консоли по xPath локаторам
 $x("//*[@id='AvailiableRules']/div/div/table/tbody/tr/td[2]") - реальный пример
 
-ПОИСК ПО ТЭГАМ И ЗНАЧЕНИЮ АТРИБУТА
+TODO ПОИСК ПО ТЭГАМ И ЗНАЧЕНИЮ АТРИБУТА
 
 //div[@id='root'] = <div id="root"> # Поиск по атрибуту и его значению
 //div[@class='main-menu'] = <div class="main-menu"> # Поиск по атрибуту и его значению
@@ -9,7 +9,7 @@ $x("//*[@id='AvailiableRules']/div/div/table/tbody/tr/td[2]") - реальный
 //button[@class='p-button'][@type='button'] = <button class="p-button" type="button"> # Поиск по тэгу, и атрибуту
 
 
-ПОИСК ПО ТЕКСТУ В ТЭГЕ И 
+TODO ПОИСК ПО ТЕКСТУ В ТЭГЕ И АТРИБУТЕ
 
 //title['Личный кабинет'] = <title>Личный кабинет</title> # содержит текст в тэге
 //span[contains(., 'Главное')] = <span class="news-navigation-menu__title">Главное</span> 
@@ -20,7 +20,7 @@ Syntax:
 XPath: //tagname[text() = 'text_value']
 
 
-"ПРЫЖКИ" ПО DOM
+TODO "ПРЫЖКИ" ПО DOM
 
 //div[@id='usernameInput']//input[@id='username'] = <div id="usernameInput">
                                                          <input id="username" value="">
@@ -34,7 +34,7 @@ XPath: //tagname[text() = 'text_value']
                                           <label for="radio-undefined-2">
                                        </div>
 
-ОСИ XPath
+TODO ОСИ XPath
 following-sibling - Выбирает элемент одного уровня после текущего
 //label[text()="ОСМОТР №"]/following-sibling::span/div - <lable>ОСМОТР №</lable>
                                                          <span></span>

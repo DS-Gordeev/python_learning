@@ -13,6 +13,7 @@ today_date = datetime.now().date().strftime('%d-%m-%Y')
 today_date_string = str(today_date.replace('-', ''))
 
 print(today_date_string)
+print(datetime.now())
 
 one_string_address = 'Московская область, город Клин, город Высоковск, улица Ленина, д. 19, кв. 10'
 b = one_string_address.split(', ')

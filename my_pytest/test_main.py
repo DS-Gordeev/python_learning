@@ -26,6 +26,8 @@ def test_scope_2(login_and_logout):
     if a == b:
         pytest.fail('Значение a и b совпадают!')
 
-
+# Принимает фикстуру с указанием имени name="ultimate_answer"
+def test_number(ultimate_answer):
+    assert ultimate_answer == 42
 
 
