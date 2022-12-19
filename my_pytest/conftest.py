@@ -15,7 +15,7 @@ my_service = Service(ChromeDriverManager().install())
 
 
 # Фикстура для запуска и закрытия драйвера
-@pytest.fixture()
+@pytest.fixture(scope='function')
 def setup():
     """Фикстура для запуска и закрытия веб-драйвера браузера Chrome"""
     driver = webdriver.Chrome(options=my_options, service=my_service)
@@ -38,7 +38,7 @@ def login_and_logout():
 
 
 @pytest.fixture(autouse=True, scope='function')
-def test_duration():
+def duration_test():
     """Фикстура для указания времени выполнения теста. Применяется автоматически"""
     start = time.time()
     yield
@@ -50,3 +50,9 @@ def test_duration():
 def other_fixture_name():
     """Фикстура с указанием имени для теста test_number"""
     return 42
+
+@pytest.fixture(params=["http://ya.ru", "http://rambler.ru", "http://mail.ru"])
+def check_urls(request):
+    """Фикстура с параметрами для теста test_with_fixture_params
+    Передает параметры params через request.param по одному"""
+    return request.param
