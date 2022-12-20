@@ -1,6 +1,7 @@
 import time
 
 import pytest
+import platform
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -51,16 +52,23 @@ def test_with_fixture_params(setup, check_urls):
     print(f'\nТест пройдет успешно')
 
 # ПАРАМЕТРИЗАЦИЯ ЧЕРЕЗ ХУК pytest_generate_tests
-def pytest_generate_tests(metafunc):
-    if "start_url" in metafunc.fixturenames:
-        metafunc.parametrize("start_url", ["http://ya.ru", "http://rambler.ru", "http://mail.ru"])
-    elif "start" in metafunc.fixturenames:
-        metafunc.parametrize("start", ["http://dev.ppdp.ru"])
-
 def test_with_hook_params(setup, start_url):
     print(f'\nТестируем сайт: {start_url}')
     setup.get(start_url)
     print(f'\nТест пройдет успешно')
+
+# ТЕСТ КОТОРЫЙ БУДЕТ ПРОПУЩЕН
+@pytest.mark.skip(reason="В разработке, пока что пропускаем")
+def test_to_be_skipped():
+    print('Этот тест в разработке и должен быть пропущен')
+
+@pytest.mark.skipif(
+    platform.system() + ' ' + platform.release() == "Windows 10",
+    platform.machine() == "AMD64",
+    reason="Для OS Windows 10 или архитектуры AMD64 тест не запускаем")
+def test_to_be_skipped_if():
+    print('Этот тест должен быть пропущен, если OS Windows 10 или арх. AMD64')
+
 
 
 

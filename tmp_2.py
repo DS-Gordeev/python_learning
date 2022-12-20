@@ -1,4 +1,6 @@
+import platform
 from datetime import datetime
+
 login = {'Стандартный': 'standard_user',
          'Заблокированный': 'locked_out_user',
          'Проблемный': 'problem_user',
@@ -27,6 +29,14 @@ c = list(pay_method.items())
 print(c)
 #if c == '1':
 #    print('Верно')
+
+print(platform.system(), platform.release())
+print(platform.platform())
+print(platform.system() + ' ' + platform.release())
+print(platform.machine())
+
+
+
 
 
 

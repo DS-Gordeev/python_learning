@@ -14,24 +14,25 @@ my_options.add_argument('start-maximized')
 my_service = Service(ChromeDriverManager().install())
 
 
-# Фикстура для запуска и закрытия драйвера
 @pytest.fixture(scope='function')
 def setup():
-    """Фикстура для запуска и закрытия веб-драйвера браузера Chrome"""
+    """Фикстура для запуска и закрытия веб-драйвера браузера Chrome
+    Возвращает объект driver через yield
+    """
     driver = webdriver.Chrome(options=my_options, service=my_service)
     yield driver
     driver.close()
 
 
-# Фикстура для тестирования scope
-# scope='function' - by default
-# scope='class'
-# scope='module'
-# scope='package'
-# scope='session'
 @pytest.fixture(scope='function')
 def login_and_logout():
-    """Тестовая фикстура для проверки параметра scope фикстуры"""
+    """Тестовая фикстура для проверки параметра scope фикстуры
+    # scope='function' - by default
+    # scope='class'
+    # scope='module'
+    # scope='package'
+    # scope='session'
+    """
     print('\nВход в систему выполнен')
     yield
     print('\nВыход из системы выполнен')
@@ -46,13 +47,23 @@ def duration_test():
     delta = str(stop - start)
     print(f'\nВремя выполнения теста: {delta[0:4]} секунд')
 
+
 @pytest.fixture(name="ultimate_answer")
 def other_fixture_name():
     """Фикстура с указанием имени для теста test_number"""
     return 42
+
 
 @pytest.fixture(params=["http://ya.ru", "http://rambler.ru", "http://mail.ru"])
 def check_urls(request):
     """Фикстура с параметрами для теста test_with_fixture_params
     Передает параметры params через request.param по одному"""
     return request.param
+
+
+def pytest_generate_tests(metafunc):
+    """Хук для параметризации теста test_with_hook_params"""
+    if "start_url" in metafunc.fixturenames:
+        metafunc.parametrize("start_url", ["http://ya.ru", "http://rambler.ru", "http://mail.ru"])
+    elif "start" in metafunc.fixturenames:
+        metafunc.parametrize("start", ["http://dev.ppdp.ru"])

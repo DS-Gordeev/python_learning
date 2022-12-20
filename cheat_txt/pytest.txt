@@ -1,5 +1,4 @@
 TODO ЗАПУСК ТЕСТОВ:
-
 ключи:
 -v или --verbose # Добавляет наименование пройденного теста (вместо символа точки .) и текст PASSED. Использовать всегда
 -s или --capture=no # Показывает в консоли вывод print`ов
@@ -13,7 +12,7 @@ pytest -s -v test_main.py # Запуск всех тестов модуля
 pytest -s -v test_one.py test_two.py # Запуск двух файлов
 pytest -s -v store/ # Запуск тестов из папки
 pytest -s -v test_main.py::test_scenario_1_ff # Запуск конкретного теста
-pytest -s -v -k test_scenario_8_oib # Запуск тестов содержащих подстроку указанную после -k
+pytest -s -v -k scenario # Запуск тестов содержащих подстроку указанную после -k
 pytest -s -v test_classes.py::TestEquality # Запуск тестового класса
 pytest -s -v test_classes.py::TestEquality::test_1 # Запуск конкретного метода из тестового класса
 pytest -s -v "test_main.py::test_with_function_params[1-first value]" # Запуск теста с конкретными параметрами (1-first value)
@@ -54,7 +53,8 @@ TODO ДЕКОРАТОРЫ:
 @pytest.mark.run(order=1) # Для указания очередгности запуска тестов. Нужно установить pip install pytest-ordering
 @pytest.mark.dependency() # Помечаем первый тест. Второй тест помечает @pytest.mark.dependency(depends=["test_1"]), т.е. второй зависит от первого и т.д. Указывает зависимость между тестами. Если test_1 упадет, то test_2 не запустится. Нужно установить pip install pytest-dependency 
 @pytest.mark.skip(reason="В разработке") # Тест будет пропущен по указанной причине
-@pytest.mark.xfail # Тест не пойдет в статистику проваленных если завершится со статусом FAILED. Не ожидается что данный тест
+@pytest.mark.skipif(condidions,..., reason="причина") # Пропускае тест, если хотя бы одно из условий TRUE
+@pytest.mark.xfail # Тест не пойдет в статистику проваленных если завершится со статусом FAILED. Не ожидается, что данный тест
 завершится успешно. Если этот тест провалится, то у него будет статус XFAIL, но если он все же пройдет, то статус будет XPASS
 
 TODO ТРИ СПОСОБА ПЕРЕДАТЬ ПАРАМЕТРЫ ДЯЛ ТЕСТОВ
