@@ -69,6 +69,11 @@ def test_to_be_skipped():
 def test_to_be_skipped_if():
     print('Этот тест должен быть пропущен, если OS Windows 10 или арх. AMD64')
 
+@pytest.mark.smoke
+def test_marker_smoke():
+    """Описание кастомных маркеров находится в файле pytest.ini в той же директрии, что и тесты"""
+    print('Тест с маркером smoke запустится с ключем "-m smoke"')
+
 
 
 
