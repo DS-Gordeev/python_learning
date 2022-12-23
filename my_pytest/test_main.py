@@ -1,11 +1,6 @@
 import time
-
 import pytest
 import platform
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 
 # Из фикстуры приходит драйвер, а в конце закрывает браузер
 def test_start(setup):
@@ -70,12 +65,10 @@ def test_to_be_skipped_if():
     print('Этот тест должен быть пропущен, если OS Windows 10 или арх. AMD64')
 
 @pytest.mark.smoke
+@pytest.mark.exeption
 def test_marker_smoke():
-    """Описание кастомных маркеров находится в файле pytest.ini в той же директрии, что и тесты"""
-    print('Тест с маркером smoke запустится с ключем "-m smoke"')
+    """Описание кастомных маркеров находится в файле pytest.ini в той же директрии, что и тесты
+       Можно указывать несколько таких маркеров и выбирать их используя логику "and", "or", "not"
 
-
-
-
-
-
+    """
+    print('Тест с маркером smoke и exeption запустится с ключем "-m smoke and exeption"')
