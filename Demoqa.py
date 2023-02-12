@@ -1,3 +1,5 @@
+import time
+import datetime as dt
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.remote.remote_connection import RemoteConnection
@@ -11,9 +13,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.color import Color
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-import datetime as dt
-
+from autotests_python.generator.generator import genereted_person
 
 options = Options()
 options.add_argument("start-maximized")
@@ -22,7 +22,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 # Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
 # driver.maximize_window()
 
-driver.get('https://www.rambler.ru')
+driver.get('https://demoqa.com/')
 
 # Удаленный запуск
 #def remote_start():
@@ -45,10 +45,11 @@ driver.get('https://www.rambler.ru')
 # Text Box
 def text_box():
     text_box_url = 'https://demoqa.com/text-box'
-    user_data = {'user_name': 'Marazmator',
-            'user_email': 'test@mail.ru',
-            'current_adress': 'Moscow',
-            'permanent_adress': 'Sherbakovskaya street, 32/7, app. 10'}
+    person_info = next(genereted_person())
+    # user_data = {'user_name': 'Marazmator',
+    #         'user_email': 'test@mail.ru',
+    #         'current_adress': 'Moscow',
+    #         'permanent_adress': 'Sherbakovskaya street, 32/7, app. 10'}
     time.sleep(2)
 
     # Переходим в раздел Elements
@@ -59,17 +60,21 @@ def text_box():
 
     # Проверяем, что мы в разделе Text Box
     assert driver.current_url == text_box_url, 'Current URL id wrong'
+    firstname = person_info.firstname
+    email = person_info.email
+    current_addr = person_info.current_address
+    permanent_addr = person_info.permanent_address
 
-    driver.find_element(By.ID, 'userName').send_keys(user_data['user_name'])
-    driver.find_element(By.ID, 'userEmail').send_keys(user_data['user_email'])
-    driver.find_element(By.ID, 'currentAddress').send_keys(user_data['current_adress'])
-    driver.find_element(By.ID, 'permanentAddress').send_keys(user_data['permanent_adress'])
+    driver.find_element(By.ID, 'userName').send_keys(firstname)
+    driver.find_element(By.ID, 'userEmail').send_keys(email)
+    driver.find_element(By.ID, 'currentAddress').send_keys(current_addr)
+    driver.find_element(By.ID, 'permanentAddress').send_keys(permanent_addr)
     driver.find_element(By.CSS_SELECTOR, 'button#submit').click()
 
-    assert user_data['user_name'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#name').text, 'Wrong username output'
-    assert user_data['user_email'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#email').text, 'Wrong email output'
-    assert user_data['current_adress'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#currentAddress').text, 'Wrong currentAddress output'
-    assert user_data['permanent_adress'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#permanentAddress').text, 'Wrong permanentAddress output'
+    assert firstname in driver.find_element(By.CSS_SELECTOR, 'div#output p#name').text, 'Wrong username output'
+    assert email in driver.find_element(By.CSS_SELECTOR, 'div#output p#email').text, 'Wrong email output'
+    assert current_addr in driver.find_element(By.CSS_SELECTOR, 'div#output p#currentAddress').text, 'Wrong currentAddress output'
+    assert permanent_addr in driver.find_element(By.CSS_SELECTOR, 'div#output p#permanentAddress').text, 'Wrong permanentAddress output'
     driver.quit()
 
 # Обновляем страницу, gеремещение вперед-назад в истории браузера
@@ -222,9 +227,7 @@ def change_attribute():
     object_attribute = object.get_attribute("attribute_name")
     print(object_attribute)
 
-
-scroll_to_elem_js()
-time.sleep(5)
+text_box()
 
 
 
