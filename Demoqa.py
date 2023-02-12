@@ -45,12 +45,6 @@ driver.get('https://demoqa.com/')
 # Text Box
 def text_box():
     text_box_url = 'https://demoqa.com/text-box'
-    person_info = next(genereted_person())
-    # user_data = {'user_name': 'Marazmator',
-    #         'user_email': 'test@mail.ru',
-    #         'current_adress': 'Moscow',
-    #         'permanent_adress': 'Sherbakovskaya street, 32/7, app. 10'}
-    time.sleep(2)
 
     # Переходим в раздел Elements
     driver.find_element(By.CSS_SELECTOR, 'div.card.mt-4.top-card').click() # Переходим в раздел Elements
@@ -60,6 +54,9 @@ def text_box():
 
     # Проверяем, что мы в разделе Text Box
     assert driver.current_url == text_box_url, 'Current URL id wrong'
+
+    # Генерируем данные пользователя
+    person_info = next(genereted_person())
     firstname = person_info.firstname
     email = person_info.email
     current_addr = person_info.current_address
@@ -77,7 +74,7 @@ def text_box():
     assert permanent_addr in driver.find_element(By.CSS_SELECTOR, 'div#output p#permanentAddress').text, 'Wrong permanentAddress output'
     driver.quit()
 
-# Обновляем страницу, gеремещение вперед-назад в истории браузера
+# Обновляем страницу, перемещение вперед-назад в истории браузера
 def refresh_and_back_forward():
     driver.refresh()
     driver.back()
