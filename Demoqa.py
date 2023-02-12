@@ -22,7 +22,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 # Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
 # driver.maximize_window()
 
-driver.get('http://demoqa.com')
+driver.get('https://www.rambler.ru')
 
 # Удаленный запуск
 #def remote_start():
@@ -87,8 +87,14 @@ def clear_input():
     driver.find_element(By.ID, 'userName').clear()
 
 # Прокрутка окна браузера вниз на указанное кол-во пикселей
-def scroll_down_javascript():
-    driver.execute_script("window.scrollTo(0, 500)")
+def scroll_down_javascript_px():
+    driver.execute_script("window.scrollTo(0, 500);")
+
+# Прокрутка окна браузера вниз до указанного элемента
+def scroll_to_elem_js():
+    # Для сайта https://www.rambler.ru
+    element = driver.find_element(By.XPATH, '//*[@id="app"]/div[7]')
+    driver.execute_script("arguments[0].scrollIntoView()", element)
 
 # Прокрутка окна браузера до определенного элемента ActionChains
 def scroll_to_elem():
@@ -216,7 +222,9 @@ def change_attribute():
     object_attribute = object.get_attribute("attribute_name")
     print(object_attribute)
 
-work_with_color()
+
+scroll_to_elem_js()
+time.sleep(5)
 
 
 
