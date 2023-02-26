@@ -112,10 +112,12 @@ def do_screenshot():
 
 # Check Box (проверка, что чекбокс активен)
 def check_box():
+    driver.find_element(By.CSS_SELECTOR, 'div.card.mt-4.top-card').click()
     driver.find_element(By.XPATH, '//li[@id="item-1"]/span[contains(., "Check Box")]').click()
     driver.find_element(By.CSS_SELECTOR, 'button[title="Expand all"]').click()
-    driver.find_element(By.CSS_SELECTOR, 'button[title="Collapse all"]').click()
-    driver.find_element(By.CSS_SELECTOR, 'ol li button:first-child').click()
+    driver.find_element(By.CSS_SELECTOR, 'svg[class="rct-icon rct-icon-check"]').click()
+
+    time.sleep(5)
 
     # Проверка, что checkbox нажат или нет (обращение именно к input)
     status_checkbox = driver.find_element(By.CSS_SELECTOR, 'input#tree-node-desktop').is_selected()
@@ -224,7 +226,7 @@ def change_attribute():
     object_attribute = object.get_attribute("attribute_name")
     print(object_attribute)
 
-text_box()
+check_box()
 
 
 
