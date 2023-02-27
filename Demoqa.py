@@ -11,9 +11,9 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.color import Color
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from autotests_python.generator.generator import genereted_person
 import time
 import datetime as dt
-
 
 options = Options()
 options.add_argument("start-maximized")
@@ -22,7 +22,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 # Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
 # driver.maximize_window()
 
-driver.get('https://dzen.ru')
+driver.get('https://demoqa.com/')
 
 # Удаленный запуск
 #def remote_start():
@@ -60,19 +60,26 @@ def text_box():
     # Проверяем, что мы в разделе Text Box
     assert driver.current_url == text_box_url, 'Current URL id wrong'
 
-    driver.find_element(By.ID, 'userName').send_keys(user_data['user_name'])
-    driver.find_element(By.ID, 'userEmail').send_keys(user_data['user_email'])
-    driver.find_element(By.ID, 'currentAddress').send_keys(user_data['current_adress'])
-    driver.find_element(By.ID, 'permanentAddress').send_keys(user_data['permanent_adress'])
+    # Генерируем данные пользователя
+    person_info = next(genereted_person())
+    firstname = person_info.firstname
+    email = person_info.email
+    current_addr = person_info.current_address
+    permanent_addr = person_info.permanent_address
+
+    driver.find_element(By.ID, 'userName').send_keys(firstname)
+    driver.find_element(By.ID, 'userEmail').send_keys(email)
+    driver.find_element(By.ID, 'currentAddress').send_keys(current_addr)
+    driver.find_element(By.ID, 'permanentAddress').send_keys(permanent_addr)
     driver.find_element(By.CSS_SELECTOR, 'button#submit').click()
 
-    assert user_data['user_name'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#name').text, 'Wrong username output'
-    assert user_data['user_email'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#email').text, 'Wrong email output'
-    assert user_data['current_adress'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#currentAddress').text, 'Wrong currentAddress output'
-    assert user_data['permanent_adress'] in driver.find_element(By.CSS_SELECTOR, 'div#output p#permanentAddress').text, 'Wrong permanentAddress output'
+    assert firstname in driver.find_element(By.CSS_SELECTOR, 'div#output p#name').text, 'Wrong username output'
+    assert email in driver.find_element(By.CSS_SELECTOR, 'div#output p#email').text, 'Wrong email output'
+    assert current_addr in driver.find_element(By.CSS_SELECTOR, 'div#output p#currentAddress').text, 'Wrong currentAddress output'
+    assert permanent_addr in driver.find_element(By.CSS_SELECTOR, 'div#output p#permanentAddress').text, 'Wrong permanentAddress output'
     driver.quit()
 
-# Обновляем страницу, gеремещение вперед-назад в истории браузера
+# Обновляем страницу, перемещение вперед-назад в истории браузера
 def refresh_and_back_forward():
     driver.refresh()
     driver.back()
@@ -87,8 +94,14 @@ def clear_input():
     driver.find_element(By.ID, 'userName').clear()
 
 # Прокрутка окна браузера вниз на указанное кол-во пикселей
-def scroll_down_javascript():
-    driver.execute_script("window.scrollTo(0, 500)")
+def scroll_down_javascript_px():
+    driver.execute_script("window.scrollTo(0, 500);")
+
+# Прокрутка окна браузера вниз до указанного элемента
+def scroll_to_elem_js():
+    # Для сайта https://www.rambler.ru
+    element = driver.find_element(By.XPATH, '//*[@id="app"]/div[7]')
+    driver.execute_script("arguments[0].scrollIntoView()", element)
 
 # Прокрутка окна браузера до определенного элемента ActionChains
 def scroll_to_elem():
@@ -104,10 +117,12 @@ def do_screenshot():
 
 # Check Box (проверка, что чекбокс активен)
 def check_box():
+    driver.find_element(By.CSS_SELECTOR, 'div.card.mt-4.top-card').click()
     driver.find_element(By.XPATH, '//li[@id="item-1"]/span[contains(., "Check Box")]').click()
     driver.find_element(By.CSS_SELECTOR, 'button[title="Expand all"]').click()
-    driver.find_element(By.CSS_SELECTOR, 'button[title="Collapse all"]').click()
-    driver.find_element(By.CSS_SELECTOR, 'ol li button:first-child').click()
+    driver.find_element(By.CSS_SELECTOR, 'svg[class="rct-icon rct-icon-check"]').click()
+
+    time.sleep(5)
 
     # Проверка, что checkbox нажат или нет (обращение именно к input)
     status_checkbox = driver.find_element(By.CSS_SELECTOR, 'input#tree-node-desktop').is_selected()
@@ -215,6 +230,11 @@ def change_attribute():
     # Проверяем, что значение изменилось
     object_attribute = object.get_attribute("attribute_name")
     print(object_attribute)
+
+work_with_color()
+
+
+
 
 
 elems = driver.find_elements(By.CSS_SELECTOR, 'div[class="card-news__tabPane-3_ card-news__active-2u"] li[class="news-story__story-2M"]')
