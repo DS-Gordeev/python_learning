@@ -22,7 +22,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 # Можно использовать не опцию, а встроенный в Selenium метод maximize_window(), нужно убрать options=options
 # driver.maximize_window()
 
-driver.get('http://demoqa.com')
+driver.get('https://dzen.ru')
 
 # Удаленный запуск
 #def remote_start():
@@ -216,16 +216,8 @@ def change_attribute():
     object_attribute = object.get_attribute("attribute_name")
     print(object_attribute)
 
-work_with_color()
 
-
-
-
-
-
-
-
-
-
-
-
+elems = driver.find_elements(By.CSS_SELECTOR, 'div[class="card-news__tabPane-3_ card-news__active-2u"] li[class="news-story__story-2M"]')
+print(len(elems))
+for i in elems:
+    print(i.find_element(By.XPATH, './a').get_attribute('href'))

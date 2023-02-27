@@ -35,6 +35,10 @@ print(platform.platform())
 print(platform.system() + ' ' + platform.release())
 print(platform.machine())
 
+a = dict()
+print(a)
+
+
 
 
 
