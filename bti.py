@@ -1,5 +1,5 @@
 import requests
-
+# Скрипт для удаленного скачивания
 error_list = []
 for i in range(9501, 9867):
     try:
