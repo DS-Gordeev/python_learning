@@ -1,39 +1,43 @@
 import requests
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
+
+error_list = []
+for i in range(9501, 9867):
+    try:
+        url = f'https://mosgorbti.com/get-order-info/{i}/'
+        req = requests.request('GET', url, timeout=60.0)
+        full_text = req.text
+        full_text = full_text.replace("\n", "")
+        full_text = " ".join(full_text.split())
+        # print(full_text)
+        # Адрес
+        addr_1 = full_text.rfind('Адрес объекта')
+        addr_2 = full_text.rfind('</span> </td> </tr> <tr> <td class="txtBold"> <label>Список объектов</label>')
+        # Номер квартиры
+        flat_1 = full_text.rfind('Список объектов')
+        flat_2 = full_text.rfind('</span> </td> </tr> <tr> <td colspan="2">')
+
+        part_1 = full_text[addr_1 + 39:addr_2 - 1]
+        part_1 = part_1.replace('/', '-')
+        part_2 = full_text[flat_1 + 42:flat_2 - 1]
+        part_2 = part_2.replace('№', ' кв.').replace('/', '-')
+
+        full_address = part_1 + part_2
+
+        url = f'https://mosgorbti.com/get-order-info/pdf/{i}/'
+        req = requests.request('GET', url, timeout=60.0)
+        with open(fr'C:\AutoTests_home\autotests_python\downloadedFiles\{i}-{full_address}.pdf', 'wb') as f:
+            f.write(req.content)
+        print(f'Заявление {i} - OK!')
+    except Exception as error:
+        print(f'Для заказа {i} возникла ошибка {error}')
+        error_list.append(i)
+        continue
+print(f'Список заявлений в которых возникла ошибка: {error_list}')
 
 
 
-# for i in range(300, 401):
-#     url = f'https://mosgorbti.com/get-order-info/pdf/{i}/'
-#     req = requests.get(url)
-#     with open(f'./downloadedFiles/{i}.pdf', 'wb') as f:
-#         f.write(req.content)
-
-# url = f'https://mosgorbti.com/get-order-info/7979/'
-# req = requests.get(url)
-# full_text = req.text
 
 
 
-url = "https://mosgorbti.com/get-order-info/7979/"
-html = urlopen(url).read()
-soup = BeautifulSoup(html, features="html.parser")
-
-# kill all script and style elements
-for script in soup(["script", "style"]):
-    script.extract()    # rip it out
-
-# get text
-text = soup.get_text()
-
-# break into lines and remove leading and trailing space on each
-lines = (line.strip() for line in text.splitlines())
-# break multi-headlines into a line each
-chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-# drop blank lines
-text = '\n'.join(chunk for chunk in chunks if chunk)
-
-print(text)
 
 
