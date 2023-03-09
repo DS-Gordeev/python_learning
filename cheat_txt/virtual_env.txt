@@ -1,0 +1,10 @@
+TODO СОЗДАНИЕ ОКРУЖЕНИЯ:
+Для WINDOWS:
+python -m venv .venv # Где .venv имя папки с создаваемым окружением
+source venv\Scripts\activate.bat # Активируем созданное окружение
+deactivate # Выход из окружения
+
+Для LINUX:
+python3 -m venv .venv # Где .venv имя папки с создаваемым окружением
+source venv/bin/activate # Активируем созданное окружение
+deactivate # Выход из окружения
