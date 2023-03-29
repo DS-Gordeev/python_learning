@@ -18,3 +18,4 @@ def genereted_person():
 person_info = next(genereted_person())
 print(person_info.email)
 
+

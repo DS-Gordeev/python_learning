@@ -2,17 +2,15 @@ from datetime import datetime
 
 
 def decor(func):
-    def wraper(arg):
-        func(arg)
+    def wraper():
         print(datetime.now())
+        func()
     return wraper
 
 
 @decor
-def print_something(string_to_print):
-    return print(string_to_print)
+def print_something():
+    return print('Строка')
 
-print_me = 'new'
-
-#print_something(print_me)
+print_something()
 
