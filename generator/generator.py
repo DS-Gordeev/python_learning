@@ -1,6 +1,8 @@
-from autotests_python.data.data import Person
+from data import Person
 from faker import Faker
 from random import randint
+
+
 fakre_ru = Faker('ru_RU')
 
 

@@ -1,8 +1,7 @@
 *.log
-tmp.py
 screenshots/*
 .idea/
 __pycache__/
 downloadedFiles
 venv/
-/.pytest_cache/
+.pytest_cache/
