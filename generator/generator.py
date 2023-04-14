@@ -3,17 +3,18 @@ from faker import Faker
 from random import randint
 
 
-fakre_ru = Faker('ru_RU')
+faked = Faker('ru_RU')
+Faker.seed()
 
 
 def genereted_person():
     yield Person(
-        firstname=fakre_ru.first_name(),
-        lastname=fakre_ru.last_name(),
-        middlename=fakre_ru.middle_name(),
-        email=fakre_ru.email(),
-        current_address=fakre_ru.address(),
-        permanent_address=fakre_ru.address(),
+        firstname=faked.first_name(),
+        lastname=faked.last_name(),
+        middlename=faked.middle_name(),
+        email=faked.email(),
+        current_address=faked.address(),
+        permanent_address=faked.address(),
         num=randint(1, 10),
     )
 
