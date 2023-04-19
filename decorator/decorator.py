@@ -2,10 +2,10 @@ from datetime import datetime
 
 
 def decor(func):
-    def wraper():
+    def wrapper():
         print(datetime.now())
         func()
-    return wraper
+    return wrapper
 
 
 @decor

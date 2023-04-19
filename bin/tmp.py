@@ -1,4 +1,5 @@
 import platform
+import builtins
 from datetime import datetime
 
 login = {'Стандартный': 'standard_user',
@@ -37,6 +38,10 @@ print(platform.machine())
 
 a = dict()
 print(a)
+
+[print(i) for i in dir(builtins)]
+
+
 
 
 
