@@ -24,5 +24,3 @@ def print_something_2():
 
 decor_result = decor(print_something_2)
 decor_result()
-
-
