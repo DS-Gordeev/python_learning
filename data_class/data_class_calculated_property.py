@@ -37,3 +37,19 @@ obj_data = VectorData3D(4, 5, 6)
 # что прописано в инициализаторе. Для этого применим функцию field() c параметром init=False,
 # т.к. нам нужно только значение result, а не его вычисление в инициализаторе дата-класса.
 print(obj_data)
+
+print("\n_____________________________\n")
+
+# order=True добавляет неявное определение методов сравнения в дата-класс
+
+@dataclass(order=True)
+class Person:
+     first_name: str = "Ahmed"
+     last_name: str = "Besbes"
+     age: int = 30
+     job: str = "Data Scientist"
+
+p1 = Person(age=30)
+p2 = Person(age=20)
+
+print(p1 > p2)  # True
