@@ -42,3 +42,5 @@ POSTMAN - https://community.postman.com/t/how-to-save-a-value-from-response-as-a
 Видео с Heisenbug https://www.youtube.com/playlist?list=PLsVTVVvrKX9vNh2Yu0k6W1yoLWXpJdIbI
 
 Авторизация, Идентификация и т.д. описание / различия - https://www.kaspersky.ru/blog/identification-authentication-authorization-difference/29123/
+
+Указатели в Python: в чём суть - https://habr.com/ru/companies/vk/articles/454324/
