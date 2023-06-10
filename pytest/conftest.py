@@ -67,3 +67,4 @@ def pytest_generate_tests(metafunc):
         metafunc.parametrize("start_url", ["http://ya.ru", "http://rambler.ru", "http://mail.ru"])
     elif "start" in metafunc.fixturenames:
         metafunc.parametrize("start", ["http://dev.ppdp.ru"])
+
