@@ -4,7 +4,6 @@ from collections import defaultdict
 
 dict_ip = defaultdict(int)
 dict_http_methods = defaultdict(int)
-keys = ['ip', 'http_method', 'duration', 'date', 'url']
 list_of_dicts = []
 
 with open('access.log', 'r') as f:
@@ -27,17 +26,20 @@ with open('access.log', 'r') as f:
         else:
             url = url_match.group('url')
 
-        # Формируем значения ключей словаря
-        data = [ip_match.group('ip'), http_method.group('http_method'), execute_time.group('time'),
-                req_date.group('date'), url]
-
-        # Собираем словарь из полученных данных и добавляем его в список
-        dictionary = dict(zip(keys, data))
-        list_of_dicts.append(dictionary)
+        # Собираем словарь из полученных данных "на лету"
+        list_of_dicts.append(
+            {
+                'ip': ip_match.group('ip'),
+                'http_method': http_method.group('http_method'),
+                'duration': execute_time.group('time'),
+                'date': req_date.group('date'),
+                'url': url
+            }
+        )
 
     # Производим сортировки по кол-ву запросов от ip адресов и времени выполнения запроса
     sorted_ip_dict = sorted(dict_ip.items(), key=lambda x: x[1], reverse=True)
-    sorted_list_of_dicts = sorted(list_of_dicts, key=lambda x: x['duration'], reverse=True)
+    sorted_list_of_dicts = sorted(list_of_dicts, key=lambda x: int(x['duration']), reverse=True)
 
     # Подсчитываем суммарное кол-во всех запросов
     dict_http_methods['TOTAL_REQUESTS'] = sum(dict_http_methods.values())
@@ -53,3 +55,4 @@ with open("result.json", "w") as result_json:
     result_json.write(data)
 
 print(json.dumps(result_dict, indent=4))
+

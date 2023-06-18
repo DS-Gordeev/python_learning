@@ -1,37 +1,37 @@
 {
     "top_ips": {
-        "37.1.206.1": 100,
-        "80.122.17.1": 84,
-        "188.22.87.6": 40
+        "148.251.50.4": 1929,
+        "213.150.254.8": 434,
+        "37.1.206.1": 433
     },
     "total_stat": {
-        "GET": 2774,
-        "POST": 1881,
-        "HEAD": 1,
-        "PUT": 1,
-        "TOTAL_REQUESTS": 4657
+        "GET": 12172,
+        "POST": 4065,
+        "HEAD": 11,
+        "PUT": 6,
+        "TOTAL_REQUESTS": 16254
     },
     "top_longest": [
+        {
+            "ip": "62.93.172.2",
+            "http_method": "POST",
+            "duration": "10000",
+            "date": "[23/Dec/2015:07:27:57 +0100]",
+            "url": "-"
+        },
+        {
+            "ip": "213.150.254.8",
+            "http_method": "GET",
+            "duration": "9999",
+            "date": "[18/Dec/2015:10:58:04 +0100]",
+            "url": "http://www.almhuette-raith.at/"
+        },
         {
             "ip": "212.199.175.2",
             "http_method": "GET",
             "duration": "9998",
             "date": "[16/Dec/2015:06:53:19 +0100]",
             "url": "-"
-        },
-        {
-            "ip": "201.79.97.2",
-            "http_method": "POST",
-            "duration": "9996",
-            "date": "[12/Dec/2015:23:54:27 +0100]",
-            "url": "http://almhuette-raith.at/administrator/"
-        },
-        {
-            "ip": "77.49.216.2",
-            "http_method": "GET",
-            "duration": "9995",
-            "date": "[13/Dec/2015:21:50:53 +0100]",
-            "url": "http://almhuette-raith.at/"
         }
     ]
 }
