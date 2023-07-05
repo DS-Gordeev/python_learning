@@ -41,6 +41,11 @@ print(a)
 
 [print(i) for i in dir(builtins)]
 
+x = -1221213123
+y = -1221213123
+print((x == y))   # Получим True
+print(id(x) == id(y))   # Получим True
+
 
 
 
